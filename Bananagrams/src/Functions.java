@@ -1,13 +1,31 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 
 public class Functions {
 
 	static int dictCall = 0;
     
     // checks dictionary API
+    /*
     public static boolean isAWord(String s) {
     	dictCall++;
     	return true;
+    }
+    */
+    private static final HashSet<String> dict;
+    static{
+    	dict = new HashSet<String>(){{
+    		add("joined"); add("road") ; add("no") ; add("not") ; add("note") ; add("den") ; add("on");add("dad");add("red");add("raid");
+    		add("noon");add("rod");add("ant");add("dead");add("read");add("jot");add("jar");add("jade");add("done");add("art");add("tea");add("eat");
+    		add("ate");add("add");add("tie");add("tide");add("toad");add("torn");add("tad");add("tan");
+    		
+    	}};
+    }
+    
+    public static boolean isAWord(String s){
+    	return dict.contains(s);
     }
     
     public static int randomWithRange(int min, int max)
@@ -30,6 +48,24 @@ public class Functions {
     	return product;
     }
     
+    public static ArrayList simulatedAnnealingGetWords(char[] chars){
+    	ArrayList<String> ls = new ArrayList<String>();
+    	String str = new String(chars);
+    	for(String s : dict){
+    		if(s.equals("joined")) ls.add(0,s);
+    		else ls.add(s);
+    		for(int i = 0 ; i < s.length(); i++){
+    			if(!str.contains(s.substring(i, i+1))){
+    				ls.remove(s);
+    				continue;
+    			}
+    		}
+    	}
+    	Collections.sort(ls, new SampleComparator());
+    	Collections.reverse(ls);
+    	return ls;
+    }
+    /*
     public static ArrayList simulatedAnnealingGetWords(char[] chars) {
     	int randomInt = 0;
     	int length = 2;
@@ -72,6 +108,8 @@ public class Functions {
     	}
     	return words;
     }
+    */
+    
 	public static void main(String[] args) {
 		String input = "abcdefg";
 		char[] chars = input.toCharArray();
@@ -84,5 +122,11 @@ public class Functions {
 //        for (int i = len; i > 0; i--) {
 //        	iterate(chars, i, new char[i], 0);
 //        }
+	}
+	public static class SampleComparator implements Comparator<String> {
+	    @Override
+	    public int compare(String o1, String o2) {
+	        return new Integer(o1.length()).compareTo(o2.length());
+	   }
 	}
 }
