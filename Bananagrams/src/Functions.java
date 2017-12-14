@@ -2,10 +2,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Functions {
+
+public class Functions implements KeyListener {
 
 	static int dictCall = 0;
+	static boolean spaceKeyPressed = false;
     
     // checks dictionary API
     /*
@@ -25,6 +29,7 @@ public class Functions {
     }
     
     public static boolean isAWord(String s){
+    	dictCall++;
     	return dict.contains(s);
     }
     
@@ -47,8 +52,7 @@ public class Functions {
     	System.out.println("product for wordLen "+wordLen+" is "+product);
     	return product;
     }
-    
-    public static ArrayList simulatedAnnealingGetWords(char[] chars){
+    public static ArrayList permutate (char[] chars){
     	ArrayList<String> ls = new ArrayList<String>();
     	String str = new String(chars);
     	for(String s : dict){
@@ -65,8 +69,22 @@ public class Functions {
     	Collections.reverse(ls);
     	return ls;
     }
+    @Override
+    public void keyReleased(KeyEvent evt) {
+    	spaceKeyPressed = evt.getKeyCode() == KeyEvent.VK_SPACE;
+    }
+    
+    @Override
+    public void keyTyped(KeyEvent evt) {
+    	
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent evt) {
+    	spaceKeyPressed = evt.getKeyCode() == KeyEvent.VK_SPACE;
+    }
     /*
-    public static ArrayList simulatedAnnealingGetWords(char[] chars) {
+    public static ArrayList permutate (char[] chars) {
     	int randomInt = 0;
     	int length = 2;
     	char[] temp = chars;
@@ -84,7 +102,7 @@ public class Functions {
     		String word = "";
     		int choice = choose(chars.length, i);
     		System.out.println("choice = "+choice);
-    		for (int k = 0; k < choice*randomizations; k++) {
+    		for (int k = 0; k < choice*randomizations && !spaceKeyPressed; k++) {
     			System.out.println("k = "+k);
     			word = "";
     			temp = chars.clone();
@@ -106,15 +124,16 @@ public class Functions {
         		System.out.println(word);
     		}
     	}
+    	Collections.sort(words, new SampleComparator());
+    	Collections.reverse(words);
     	return words;
     }
     */
-    
 	public static void main(String[] args) {
-		String input = "abcdefg";
+		String input = "joined";
 		char[] chars = input.toCharArray();
 //		ArrayList<String> anagrams = getAnagrams(chars, input);
-		ArrayList<String> anagrams = simulatedAnnealingGetWords(chars);
+		ArrayList<String> anagrams = permutate(chars);
 		System.out.println(anagrams.size());
 		System.out.println(anagrams.toString());
     	System.out.println("dictionaryCalls: "+ dictCall);

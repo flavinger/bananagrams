@@ -52,7 +52,7 @@ public class Board implements Cloneable{
 	//construct board with only one word, under assumption that "this" is an empty board.
 	public Board buildOneWordBoard(String letters){
 		Board child = new Board(this.unusedLetters);
-		ArrayList<String> listOfWords = Functions.simulatedAnnealingGetWords(letters.toCharArray());
+		ArrayList<String> listOfWords = Functions.permutate(letters.toCharArray());
 		listOfWords = this.removeChecked(listOfWords);
 		if(listOfWords.isEmpty()) return null;
     	System.out.print("Candidate words for empty board: ");
@@ -89,7 +89,7 @@ public class Board implements Cloneable{
 			System.out.println("Entry checked: " + w);
 			for(int j = 0 ; j < w.length() ; j ++){
 				String s = this.unusedLetters + w.substring(j, j+ 1);
-				ArrayList<String> listOfWords = Functions.simulatedAnnealingGetWords(s.toCharArray());
+				ArrayList<String> listOfWords = Functions.permutate(s.toCharArray());
 				listOfWords = this.removeChecked(listOfWords);
 		    	System.out.print("Candidate words for "+ w.substring(j,j+1) + " : ");
 		    	for(int z = 0 ; z < listOfWords.size(); z++){
