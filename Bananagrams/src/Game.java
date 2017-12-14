@@ -2,7 +2,7 @@ import java.util.*;
 public class Game {
 	
 	public static void main(String[] args){
-		ArrayList<String> alphabet = new ArrayList<String>(Arrays.asList("j,o,i,n,e,d,r,a,d,o,n,t,d".split(",")));
+		ArrayList<String> alphabet = new ArrayList<String>(Arrays.asList("n,e,y,t,s,i,b,e,n,s,e,t,u,m,i,x,e,s,l,d,n,e,z,r,s,k,r,e,j,s,x".split(",")));
 		Random r = new Random();
 		StringBuilder initLetters = new StringBuilder();
 		for (int i = 0; i < 10; i++) {
@@ -31,6 +31,13 @@ public class Game {
 					// otherwise, build new children
 					System.out.println("building one word tree with: "+ current.getLetters());
 					Board nextB = b.buildOneWordBoard(current.getLetters());
+					if(nextB == null){
+						String newChars = alphabet.remove(r.nextInt(alphabet.size()))+
+								(alphabet.isEmpty() ? "": alphabet.remove(r.nextInt(alphabet.size()))) +
+								(alphabet.isEmpty() ? "": alphabet.remove(r.nextInt(alphabet.size())));
+						current = dump(current,newChars);
+						continue;
+					}
 					current = new Node(current, nextB);
 					continue;
 				}				

@@ -6,6 +6,7 @@ public class Board implements Cloneable{
 	private ArrayList<Entry> entries;
 	private String unusedLetters;
 	private HashSet<String> checkedWords;
+	private static final int SIZE = 30;
 	
 	//costs for letters, the harder it is to make a word with that letter, the higher the cost.
 	private static final HashMap<Character, Integer> charCosts ;
@@ -20,9 +21,9 @@ public class Board implements Cloneable{
 	
 	//construct empty board 
 	public Board(String letters){
-		map = new Position[20][20];
-		for( int i = 0 ; i < 20; i ++){
-			for(int j = 0 ; j < 20; j++){
+		map = new Position[SIZE][SIZE];
+		for( int i = 0 ; i < SIZE; i ++){
+			for(int j = 0 ; j < SIZE; j++){
 				map[i][j] = new Position(i,j);
 			}
 		}
@@ -62,7 +63,7 @@ public class Board implements Cloneable{
     	System.out.println();
 		String firstWord = listOfWords.get(0);
 		int x = map.length / 2;
-		int y = (map[x].length - firstWord.length()) / 2;
+		int y = (map[x].length - firstWord.length()) / 2 - 5;
 		this.checkedWords.add(firstWord);
 		child.deleteChars(firstWord);
 		child.addEntry(x, y, firstWord, false);
