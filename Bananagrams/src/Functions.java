@@ -128,10 +128,9 @@ public class Functions implements KeyListener {
     	Collections.sort(words, new SampleComparator());
     	Collections.reverse(words);
     	return words;
-    }
-    */
+    }*/
 	public static void main(String[] args) {
-		String input = "joined";
+		String input = "riskjmte";
 		char[] chars = input.toCharArray();
 //		ArrayList<String> anagrams = getAnagrams(chars, input);
 		ArrayList<String> anagrams = permutate(chars);
