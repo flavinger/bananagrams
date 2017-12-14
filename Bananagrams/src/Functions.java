@@ -17,9 +17,10 @@ public class Functions {
     private static final HashSet<String> dict;
     static{
     	dict = new HashSet<String>(){{
-    		add("joined"); add("road") ; add("no") ; add("not") ; add("note") ; add("den") ; add("on");add("dad");add("red");add("raid");
-    		add("noon");add("rod");add("ant");add("dead");add("read");add("jot");add("jar");add("jade");add("done");add("art");add("tea");add("eat");
-    		add("ate");add("add");add("tie");add("tide");add("toad");add("torn");add("tad");add("tan");
+    		add("sex");add("jerks");add("mix");add("mutes");add("elders");add("zen");add("bent");add("sty");add("yen");
+    		add("jerk");add("mute");add("elder");add("but");add("bust");add("bus");add("yes");add("meld");add("melt");
+    		add("rim");add("miss");add("stem");add("bin");add("risk");add("kin");add("jet");add("jets");
+    		add("jesus");add("jest");add("just");
     		
     	}};
     }
